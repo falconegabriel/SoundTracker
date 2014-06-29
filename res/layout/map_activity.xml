@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF" >
+
+    <in.ubee.android.view.IndoorMapView
+        android:id="@+id/map_fragment_indoor_map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="10dp"
+        android:background="#48000000"
+        android:orientation="horizontal" >
+
+        <br.cin.ufpe.soundtracker.views.LocationStateWidget
+            android:id="@+id/map_activity_location_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:minHeight="48dp"
+            android:minWidth="48dp"
+            android:contentDescription="@null" />
+
+        <LinearLayout
+            android:layout_width="0.1dp"
+            android:layout_height="match_parent"
+            android:background="#FFF" >
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/current_sound_value_text_view"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="0.0db"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+</RelativeLayout>

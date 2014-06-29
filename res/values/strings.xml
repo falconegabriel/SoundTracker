@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sound Meter</string>
+    <string name="toast_message">On or Off</string>
+    <string name="settings_ok">OK</string>
+    <string name="adjust_sensitivity">Calibrate sensitivity</string>
+    <string name="adjust_sensitivity_instructions">To calibrate sensitivity you will need a steady sound source and a calibrated SPL meter. Turn on the sound source and the reference meter. Adjust the sensitivity until the two dB readings match.</string>
+    <string name="minus_5_db">-5\ndB</string>
+    <string name="minus_1_db">-1\ndB</string>
+    <string name="plus_1_db">+1\ndB</string>
+    <string name="plus_5_db">+5\ndB</string>
+    <string name="gain_error_text">Sensitivity correction:</string>
+    <string name="gain">0.0</string>
+    <string name="sample_rate">Sample Rate</string>
+
+    <string-array name="sample_rate_array">
+        <item>8000</item>
+        <item>16000</item>
+    </string-array>
+    
+    <string name="map_info_options_menu_title">Menu</string>
+    <string name="map_activity_options_menu_title">Menu</string>
+    <string name="map_activity_menu_serch">Buscar</string>
+    <string name="map_activity_menu_retail_list">Lista de Shoppings</string>
+    <string name="map_activity_menu_store_list">Lojas</string>
+    <string name="map_activity_menu_about_list">Informações</string>
+    <string name="map_activity_menu_map_list">Mapa</string>
+    <string name="map_activity_error_message_location_unavailable">Localização indisponível</string>
+    <string name="map_activity_error_message_location_unavailable_wifi_cause">Wifi indisponível, verifique se sua wifi está ativada para se localizar</string>
+    <string name="map_activity_error_message_location_unavailable_network_cause">Internet indisponível. Verifique sua conexão para se localizar</string>
+    <string name="map_fragment_image_load_exception_msg">O mapa não pode ser carregado</string>
+    <string name="map_fragment_select_floor_content_description">Selecionar Andar</string>
+    <string name="map_fragment_show_user_position_content_description">Exibir sua posição</string>
+
+    <string name="error_message_ubee_exception">Essa operação falhou em ser efetuada</string>
+    <string name="error_message_undefined_exception">Essa operação resultou em um erro não tratado</string>
+    <string name="error_message_status_exception">Status não definido</string>
+    <string name="error_message_null_response_exception">Essa operação retornou uma resposta inválida</string>
+    <string name="error_message_login_exception">O login não pode ser efetuado</string>
+    <string name="error_message_login_unauthenticated_exception">Você precisa estar logado para efetuar essa operação</string>
+    <string name="error_message_login_not_logged_in_exception">Você precisa estar logado para efetuar essa operação</string>
+    <string name="error_message_login_invalid_exception">Login e/ou senha inválidos</string>
+    <string name="error_message_maps_exception">Essa operação resultou em um erro não tratado envolvendo mapas</string>
+    <string name="error_message_retail_exception">Essa operação resultou em um erro não tratado de um estabelecimento</string>
+    <string name="error_message_retail_not_found_exception">Estabelecimento não encontrado</string>
+    <string name="error_message_retail_map_image_not_found_exception">Estabelecimento não possui a imagem de algum de seus mapas</string>
+    <string name="error_message_retail_map_exception">Essa operação resultou em um erro não tratado de um mapa</string>
+    <string name="error_message_retail_map_not_found_exception">Mapa não encontrado</string>
+    <string name="error_message_invalid_mapping_exception">Ocorreu um mapeamento inválido no JSON do objeto</string>
+    <string name="error_message_network_exception">Essa operação resultou em um erro na comunicação</string>
+    <string name="error_message_unauthorized_exception">Você não tem permissão para efetuar essa operação</string>
+    <string name="error_message_network_unavailable_exception">A conexão não está disponivel</string>
+    <string name="error_message_cannot_reach_server_exception">O servidor não pode ser acessado, tente novamente mais tarde.</string>
+    <string name="error_message_request_not_found_exception">Pagina não encontrada para essa requisição</string>
+
+</resources>
