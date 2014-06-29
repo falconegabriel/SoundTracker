@@ -19,6 +19,31 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.util.Log;
 
+/**
+ * This is a simple class that encapsulates the audio input and provides a
+ *  callback interface for real-time audio processing.
+ * 
+ * This method is set up to provide 50 frames per second (i.e. 20 ms frames)
+ * independent of sampling rate.
+ * 
+ * To use it
+ * 1) implement the MicrophoneInputListener interface e.g.
+ *     class MyAwesomeClass implements MicrophoneInputListener {...}
+ * 2) Create the object, e.g. 
+ *     micInput = new MicrophoneInput(this);
+ * 3) Implement processAudioFrame in your MyAwesomeClass
+ *     public void processAudioFrame(short[] audioFrame) {...}.
+ *     
+ * An example is provided in LevelMeterActivity.
+ * 
+ * Audio capture runs in a separate thread which is set up when start() is
+ * called and destroyed when stop() is called.
+ * 
+ * @author Trausti Kristjansson
+ * 
+ * @Modified by Gabriel Falcone (gafm@cin.ufpe.br)
+ *
+ */
 public class MicrophoneInput implements Runnable {
 	int mSampleRate = 8000;
 	int mAudioSource = MediaRecorder.AudioSource.VOICE_RECOGNITION;
