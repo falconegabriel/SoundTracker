@@ -29,6 +29,7 @@ import android.widget.Toast;
 import br.cin.ufpe.soundtracker.views.CustomDialog;
 import br.cin.ufpe.soundtracker.views.LocationStateWidget;
 import br.cin.ufpe.soundtracker.views.LocationStateWidget.LocationState;
+import br.cin.ufpe.soundtracker.views.SoundMapView;
 
 public class MapActivity extends Activity implements OnClickListener,
 OnMapsLocationListener, MicrophoneInputListener {
@@ -84,6 +85,8 @@ OnMapsLocationListener, MicrophoneInputListener {
 		mMicInput.setAudioSource(mAudioSource);
 		mMicInput.start();
 		
+		SoundMapView pointView = new SoundMapView(this);
+		
 		if (!mMapView.isRetailLoaded()) {
 			mDialog.show();
 			
@@ -111,6 +114,8 @@ OnMapsLocationListener, MicrophoneInputListener {
 
 				}
 			});
+//			mMapView.addView(pointView);
+			
 		}
 
 		this.mLocatingView = (LocationStateWidget) this
@@ -121,6 +126,7 @@ OnMapsLocationListener, MicrophoneInputListener {
 
 		this.mLocatingView.setSelected(false);
 
+		this.setContentView(pointView);
 	}
 
 	@Override
