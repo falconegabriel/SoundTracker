@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:title="Release to stop recording"
+        android:id="@+id/map_activity_recording_menu_item"
+        android:showAsAction="always"
+        android:icon="@drawable/map_activity_recording_selector">
+    </item>
+
+</menu>

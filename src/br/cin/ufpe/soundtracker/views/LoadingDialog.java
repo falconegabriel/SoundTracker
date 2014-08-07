@@ -5,12 +5,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.view.WindowManager.LayoutParams;
 
-public class CustomDialog {
+public class LoadingDialog {
 
     private String key;
     private ProgressDialog dialog;
 
-    public CustomDialog(Activity activity) {
+    public LoadingDialog(Activity activity) {
         this.dialog = new ProgressDialog(activity);
         this.dialog.getWindow().setFlags(LayoutParams.FLAG_FULLSCREEN, LayoutParams.FLAG_FULLSCREEN);
         this.dialog.setTitle("");

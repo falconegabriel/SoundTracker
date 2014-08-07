@@ -7,7 +7,9 @@
     <in.ubee.android.view.IndoorMapView
         android:id="@+id/map_fragment_indoor_map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+    </in.ubee.android.view.IndoorMapView>
 
     <LinearLayout
         android:layout_width="match_parent"
