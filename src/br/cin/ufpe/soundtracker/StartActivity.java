@@ -43,9 +43,9 @@ public class StartActivity extends Activity {
     }
     
     private void inLocoMediaInitialization() {
-        UbeeOptions options = UbeeOptions.defaultOptions();
+        UbeeOptions options = UbeeOptions.getInstance(this);
         options.setLogEnabled(true);
-        options.setMapsProductionKey(Configurations.APP_ID, Configurations.APP_SECRET);
+        options.setMapsKey(Configurations.APP_ID, Configurations.APP_SECRET);
         Ubee.init(this, options);
     }
     

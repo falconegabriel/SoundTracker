@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:title="Release to stop recording"
+        android:title="Clique para começar a gravar"
         android:id="@+id/map_activity_recording_menu_item"
         android:showAsAction="always"
-        android:icon="@drawable/map_activity_recording_selector">
+        android:icon="@android:drawable/ic_media_play">
     </item>
 
 </menu>

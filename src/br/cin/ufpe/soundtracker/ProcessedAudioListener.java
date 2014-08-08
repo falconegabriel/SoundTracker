@@ -25,7 +25,7 @@ package br.cin.ufpe.soundtracker;
  * @Modified by Gabriel Falcone (gafm@cin.ufpe.br)
  *
  */
-public interface MicrophoneInputListener {
+public interface ProcessedAudioListener {
   /**
    * processAudioFrame gets called periodically, e.g. every 20ms with PCM
    * audio samples.
@@ -34,5 +34,5 @@ public interface MicrophoneInputListener {
    * is 8000 samples per second, then the array should contain 160 16 bit
    * samples.
    */
-    public void processAudioFrame(short[] audioFrame);
+  public void onAudioReceived(final double d);
 }

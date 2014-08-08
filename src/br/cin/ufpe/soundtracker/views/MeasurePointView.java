@@ -10,15 +10,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.PointF;
 import android.graphics.Rect;
 import android.view.View;
+import br.cin.ufpe.soundtracker.SoundMeasure;
 
 public class MeasurePointView extends View implements InteractiveChildInterface {
 
-    private Set<Measure> mMeasures;
+    private Set<SoundMeasure> mMeasures;
 
-    private float mMeasureRadius = 20;
+    private float mMeasureRadius = SoundMeasure.RADIUS;
     private float mStrokeWidth = 5f;
     private float mTextSize = 10;
     private Rect mTextMeasureRect;
@@ -27,7 +27,7 @@ public class MeasurePointView extends View implements InteractiveChildInterface 
     private Paint mSelectedPaint;
     private Paint mTextPaint;
     
-    private Measure mSelectedMeasure;
+    private SoundMeasure mSelectedMeasure;
 
     public MeasurePointView(Context context) {
         super(context);
@@ -41,7 +41,7 @@ public class MeasurePointView extends View implements InteractiveChildInterface 
         mStrokeWidth *= this.getResources().getDisplayMetrics().density;
         mTextSize *= this.getResources().getDisplayMetrics().density;
 
-        mMeasures = new HashSet<Measure>();
+        mMeasures = new HashSet<SoundMeasure>();
         mDefaultPaint = new Paint();
 
         mDefaultPaint = new Paint();
@@ -62,27 +62,31 @@ public class MeasurePointView extends View implements InteractiveChildInterface 
         mSelectedPaint.setStrokeJoin(Paint.Join.ROUND);
         mSelectedPaint.setStrokeWidth(mStrokeWidth);
 
-        this.populate();
     }
 
-    public void addMeasure(final Measure measure) {
-        mMeasures.add(measure);
-        mSelectedMeasure = measure;
-    }
-
-    private void populate() {
-        for (int i = 0; i < 300; i += 50) {
-            Measure measure = new Measure();
-            measure.set(i, i);
-            measure.value = i;
-            this.addMeasure(measure);
+    public void addMeasure(final SoundMeasure measure) {
+        
+        boolean found = false;
+        
+        for (SoundMeasure oldMeasure : mMeasures) {
+            if (oldMeasure.equals(measure)) {
+                oldMeasure.value = measure.value;
+                found = true;
+            }
         }
+        
+        if (!found) {
+            mMeasures.add(measure);
+        }
+        
+        mSelectedMeasure = measure;
+        invalidate();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
-        for (Measure measure : mMeasures) {
+        for (SoundMeasure measure : mMeasures) {
 
             canvas.drawCircle(measure.x, measure.y, mMeasureRadius, mDefaultPaint);
             
@@ -124,33 +128,4 @@ public class MeasurePointView extends View implements InteractiveChildInterface 
 
 }
 
-class Measure extends PointF {
-    float radius;
-    float value;
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + Float.floatToIntBits(x);
-        result = prime * result + Float.floatToIntBits(y);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Measure other = (Measure) obj;
-        if (Float.floatToIntBits(x) != Float.floatToIntBits(other.x))
-            return false;
-        if (Float.floatToIntBits(y) != Float.floatToIntBits(other.y))
-            return false;
-        return true;
-    }
-
-}
