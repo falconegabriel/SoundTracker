@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package br.cin.ufpe.soundtracker;
+package br.cin.ufpe.soundtracker.microphone;
 
 /**
  * This is the interface to the MicrophoneInput class for wrapping

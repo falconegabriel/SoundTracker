@@ -4,6 +4,8 @@ import in.ubee.models.Retail;
 
 public final class Configurations {
     
+    public static final int SOUND_AREA_MATCH_RADIUS = 40;
+    
     public static final String APP_ID = "e5d079f9adcb039fed69bf99023ec15509fd656b85ecad6d7afca66ce298971c";
     public static final String APP_SECRET = "91ee95fe17bb2745c9fa114871c86f9989027565f5958e052f31a9be0a6e1154";
     

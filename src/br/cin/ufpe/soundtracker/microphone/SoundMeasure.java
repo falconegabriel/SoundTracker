@@ -1,4 +1,6 @@
-package br.cin.ufpe.soundtracker;
+package br.cin.ufpe.soundtracker.microphone;
+
+import br.cin.ufpe.soundtracker.utils.Configurations;
 
 
 public class SoundMeasure {
@@ -21,10 +23,10 @@ public class SoundMeasure {
             return false;
         }
         SoundMeasure other = (SoundMeasure) obj;
-        if (!distanceSmallerThanOffset(x, other.x, RADIUS)) {
+        if (!distanceSmallerThanOffset(x, other.x, Configurations.SOUND_AREA_MATCH_RADIUS)) {
             return false;
         }
-        if (!distanceSmallerThanOffset(y, other.y, RADIUS)) {
+        if (!distanceSmallerThanOffset(y, other.y, Configurations.SOUND_AREA_MATCH_RADIUS)) {
             return false;
         }
         return true;

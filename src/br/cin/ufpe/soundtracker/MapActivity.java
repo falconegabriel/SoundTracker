@@ -9,6 +9,8 @@ import in.ubee.api.location.LocationError;
 import in.ubee.api.maps.OnMapsLocationListener;
 import in.ubee.api.models.Location;
 import in.ubee.api.ui.listener.OnMapViewLoadListener;
+import in.ubee.api.ui.views.InternalIndoorMapView;
+import in.ubee.api.ui.views.InternalIndoorMapView.Options;
 import in.ubee.models.Retail;
 import in.ubee.models.RetailMap;
 
@@ -26,6 +28,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.cin.ufpe.soundtracker.microphone.MicrophoneManager;
+import br.cin.ufpe.soundtracker.microphone.ProcessedAudioListener;
+import br.cin.ufpe.soundtracker.microphone.SoundMeasure;
 import br.cin.ufpe.soundtracker.utils.Configurations;
 import br.cin.ufpe.soundtracker.views.LoadingDialog;
 import br.cin.ufpe.soundtracker.views.LocationStateWidget;
@@ -65,8 +70,13 @@ public class MapActivity extends Activity implements OnClickListener, OnMapsLoca
         mDbTextView = (TextView) findViewById(R.id.current_sound_value_text_view);
         mMicrophoneManager = new MicrophoneManager(this, this);
 
+        InternalIndoorMapView.Options options = Options.defaultOptions();
+        options.setRouteEnabled(false);
+        options.setUserInteractionEnabled(false);
+
         mMapView = (IndoorMapView) findViewById(R.id.map_fragment_indoor_map_view);
         mMapView.setCloseRouteGravity(Gravity.LEFT | Gravity.BOTTOM, 0, 0);
+        mMapView.setOptions(options);
 
         if (!mMapView.isRetailLoaded()) {
             mDialog.show();
@@ -92,6 +102,8 @@ public class MapActivity extends Activity implements OnClickListener, OnMapsLoca
                         Log.w(TAG, error);
                         Toast.makeText(MapActivity.this, error.getClass() + ": " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+
+                    mDialog.dismiss("");
 
                 }
             });
@@ -126,18 +138,14 @@ public class MapActivity extends Activity implements OnClickListener, OnMapsLoca
 
     private void setMicrophoneStatus(boolean state) {
         if (!mMicrophoneManager.isRecording() && state) {
-            if (mLastLocation != null) {
-                mRecordingMenuItem.setIcon(android.R.drawable.ic_media_pause);
-                mRecordingMenuItem.setTitle("Clique para parar de gravar");
-                mMicrophoneManager.start();
-            } else {
-                Toast.makeText(this, "Localização indisponível. O microfone não poderá ser ligado", Toast.LENGTH_SHORT).show();
-            }
-        } else if (!mMicrophoneManager.isRecording() && !state){
+            mRecordingMenuItem.setIcon(android.R.drawable.ic_media_pause);
+            mRecordingMenuItem.setTitle("Clique para parar de gravar");
+            mMicrophoneManager.start();
+        } else if (mMicrophoneManager.isRecording() && !state) {
             mRecordingMenuItem.setIcon(android.R.drawable.ic_media_play);
             mRecordingMenuItem.setTitle("Clique para começar a gravar");
-            mDbTextView.setText("0.0db");
             mMicrophoneManager.stop();
+            mDbTextView.setText("0.0db");
         }
     }
 
@@ -175,9 +183,10 @@ public class MapActivity extends Activity implements OnClickListener, OnMapsLoca
 
     @Override
     public void onLocationChanged(Location location) {
-        if (location != null && location.getRetailId() != null && this.mRetail.getId().equals(location.getRetailId())) {
+        if (location != null && location.getRetailId() != null) {
             mLocatingView.setLocationAvailableProcessing();
             mMapView.setUserLocation(location);
+            mLastLocation = location;
 
         } else {
             this.onError(LocationError.UNAVAILABLE);
@@ -216,19 +225,25 @@ public class MapActivity extends Activity implements OnClickListener, OnMapsLoca
                 showLocationErrorToast();
             }
         }
-      
-        setMicrophoneStatus(false);
     }
 
     @Override
     public void onAudioReceived(final double value) {
-        if (mLastLocation != null) {
-            SoundMeasure measure = new SoundMeasure();
-            measure.set(mLastLocation.getX(), mLastLocation.getY());
-            measure.value = (float) value;
-            mMeasurePointView.addMeasure(measure);
-            mDbTextView.setText(value + "db");
-            setMicrophoneStatus(false);
+        
+        if (mMicrophoneManager.isRecording()) {
+            
+            if (value > 0 && mLastLocation != null) {
+                SoundMeasure measure = new SoundMeasure();
+                measure.set(mLastLocation.getX(), mLastLocation.getY());
+                measure.value = (float) value;
+                mMeasurePointView.addMeasure(measure);
+            }
+
+            if (value > 0) {
+                mDbTextView.setText(value + "db");
+            } else {
+                mDbTextView.setText("Microphone unavailable");
+            }
         }
     }
 

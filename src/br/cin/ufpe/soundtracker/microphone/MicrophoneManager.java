@@ -1,4 +1,4 @@
-package br.cin.ufpe.soundtracker;
+package br.cin.ufpe.soundtracker.microphone;
 
 import java.text.DecimalFormat;
 
@@ -80,11 +80,15 @@ public class MicrophoneManager implements MicrophoneInputListener {
                     
                     DecimalFormat df = new DecimalFormat("##");
                     df.setMinimumFractionDigits(1);
-                    mListener.onAudioReceived(Double.parseDouble(df.format(20 + rmsdB)));
-                    
+                    if (Double.isInfinite(rmsdB)) {
+                        mListener.onAudioReceived(-1);    
+                    } else {
+                        mListener.onAudioReceived(Double.parseDouble(df.format(20 + rmsdB)));
+                    }
                     mDrawing = false;
                 }
             });
+
         }
     }
     

@@ -12,7 +12,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.view.View;
-import br.cin.ufpe.soundtracker.SoundMeasure;
+import br.cin.ufpe.soundtracker.microphone.SoundMeasure;
 
 public class MeasurePointView extends View implements InteractiveChildInterface {
 
